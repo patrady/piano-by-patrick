@@ -18,16 +18,85 @@ const videos = [
     id: 3,
     piece: "Ave Maria — Schubert",
     description:
-      "A reverent, deeply moving piece equally at home in a Catholic Mass or intimate chapel wedding. One of Patrick's most-requested pieces.",
+      "A reverent, deeply moving piece equally at home in a liturgical service or intimate chapel wedding. One of Patrick's most-requested pieces.",
   },
 ];
+
+const testimonials = [
+  {
+    quote:
+      "Patrick's playing made our ceremony feel like a movie. Every guest commented on the music.",
+    name: "Lester and Grace Sander",
+    event: "Wedding @ Nashville, TN",
+  },
+  {
+    quote:
+      "Patrick's playing made our ceremony feel like a movie. Every guest commented on the music.",
+    name: "Adam and Mary Smith",
+    event: "Catholic Wedding @ Ashland City, TN",
+  },
+  {
+    quote:
+      "Patrick's playing made our ceremony feel like a movie. Every guest commented on the music.",
+    name: "Drew and Julie Richard",
+    event: "Catholic Wedding @ Fort Worth, TX",
+  },
+  {
+    quote:
+      "Patrick's playing made our ceremony feel like a movie. Every guest commented on the music.",
+    name: "Tance and Karly Kline",
+    event: "Wedding @ Akron, OH",
+  },
+  {
+    quote:
+      "He played Ave Maria at our wedding ceremony and there wasn't a dry eye in the church.",
+    name: "Michael and Carolyn Matthews",
+    event: "Wedding @ Indianapolis, IN",
+  },
+  {
+    quote:
+      "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
+    name: "Stephen and Augi Reisdorf",
+    event: "Wedding in Spring Hill, TN",
+  },
+  {
+    quote:
+      "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
+    name: "Jarod and Jes Reuter",
+    event: "Wedding in Oshkosh, WI",
+  },
+  {
+    quote:
+      "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
+    name: "Luke and Emily Matthews",
+    event: "Wedding @ Sugar Hill, GA",
+  },
+  {
+    quote:
+      "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
+    name: "Pastor Russell Yoder",
+    event: "Liturgical Service @ Spring Hill United Methodist Church",
+  },
+  {
+    quote:
+      "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
+    name: "Pastor Russell Yoder",
+    event: "Liturgical Service @ Spring Hill United Methodist Church",
+  },
+  {
+    quote:
+      "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
+    name: "Juan Magana",
+    event: "Catholic Confirmation Retreat @ Franklin, TN",
+  }
+]
 
 const specialties = [
   {
     icon: "✝",
-    title: "Catholic Mass",
+    title: "Liturgical Services",
     description:
-      "Trained in liturgical music, Patrick provides live piano for Mass — from offertory to communion. He understands the rhythm of the Mass and adds music that lifts the worship without distracting from it.",
+      "Patrick has played for both Catholic and Methodist churches, providing live piano that lifts worship without distracting from it. He understands the rhythm of a service and brings music that serves the moment.",
   },
   {
     icon: "♡",
@@ -45,15 +114,14 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6">
           <AnimateOnScroll animation="fade-up">
             <p className="text-sm font-semibold uppercase tracking-widest text-amber-800">
-              Live Piano — Nashville, TN
+              Pianist in Nashville, TN
             </p>
             <h1 className="mt-4 text-5xl font-bold tracking-tight text-stone-900 sm:text-6xl lg:text-7xl">
-              Patrick Brady
-              <span className="block text-amber-800">Piano</span>
+              Piano by Patrick
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-8 text-stone-600">
-              Elegant live piano for weddings, Catholic Mass, and special
-              events. Music that moves people — not just fills the room.
+              Need a live pianist or organist for your wedding, liturgical service, or special event?
+              You're in the right place.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
@@ -82,6 +150,31 @@ export default function Home() {
             />
           ))}
         </div>
+
+        {/* Floating music notes between staff lines */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden hidden lg:block">
+          {[
+            { note: "♩", top: "20%", right: "36%", fontSize: "5rem", delay: "0s", duration: "3.4s", opacity: 0.18 },
+            { note: "♫", top: "34%", right: "22%", fontSize: "7rem", delay: "0.7s", duration: "4s", opacity: 0.15 },
+            { note: "♪", top: "19%", right: "12%", fontSize: "4rem", delay: "1.4s", duration: "3s", opacity: 0.20 },
+            { note: "♬", top: "53%", right: "7%", fontSize: "6rem", delay: "0.3s", duration: "3.7s", opacity: 0.14 },
+          ].map((n, i) => (
+            <span
+              key={i}
+              className="note-float absolute text-amber-900 select-none"
+              style={{
+                top: n.top,
+                right: n.right,
+                fontSize: n.fontSize,
+                opacity: n.opacity,
+                animationDelay: n.delay,
+                animationDuration: n.duration,
+              }}
+            >
+              {n.note}
+            </span>
+          ))}
+        </div>
       </section>
 
       {/* Video Performances */}
@@ -96,33 +189,35 @@ export default function Home() {
             </p>
           </AnimateOnScroll>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 flex flex-col gap-16">
             {videos.map((v, i) => (
               <AnimateOnScroll
                 key={v.id}
                 animation="fade-up"
                 delay={i * 120}
-                className="video-card flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-[#faf9f7]"
+                className={`video-card relative flex flex-col sm:flex-row rounded-2xl bg-[#faf9f7] sm:min-h-[600px] ${i % 2 === 1 ? "sm:flex-row-reverse" : ""
+                  }`}
               >
                 {/* Video placeholder */}
-                <div className="relative flex aspect-video items-center justify-center bg-stone-900">
-                  <div className="absolute inset-0 bg-gradient-to-br from-stone-800 to-stone-950 opacity-90" />
-                  <div className="relative z-10 flex flex-col items-center gap-3">
-                    <button
-                      type="button"
-                      aria-label={`Play ${v.piece}`}
-                      className="play-btn relative flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-transform hover:scale-110"
-                    >
-                      <span className="ml-1 border-b-[10px] border-l-[18px] border-t-[10px] border-b-transparent border-l-white border-t-transparent" />
-                    </button>
-                    <span className="text-xs font-medium uppercase tracking-widest text-stone-400">
-                      Video coming soon
-                    </span>
+                <div className="relative aspect-video sm:aspect-auto sm:w-1/2 shrink-0">
+                  <div className="absolute left-8 right-8 top-1/2 -translate-y-1/2 h-[60%] flex items-center justify-center rounded-2xl border border-stone-200 bg-stone-100 shadow-sm">
+                    <div className="flex flex-col items-center gap-3">
+                      <button
+                        type="button"
+                        aria-label={`Play ${v.piece}`}
+                        className="play-btn relative flex h-14 w-14 items-center justify-center rounded-full bg-stone-200 transition-transform hover:scale-110"
+                      >
+                        <span className="ml-1 border-b-[10px] border-l-[18px] border-t-[10px] border-b-transparent border-l-stone-500 border-t-transparent" />
+                      </button>
+                      <span className="text-xs font-medium uppercase tracking-widest text-stone-400">
+                        Video coming soon
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-semibold text-stone-900">{v.piece}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-stone-500">
+                <div className="flex flex-1 flex-col justify-center p-8 sm:p-12">
+                  <h3 className="text-xl font-semibold text-stone-900">{v.piece}</h3>
+                  <p className="mt-3 leading-7 text-stone-500">
                     {v.description}
                   </p>
                 </div>
@@ -168,45 +263,44 @@ export default function Home() {
               What Couples Say
             </h2>
           </AnimateOnScroll>
+        </div>
 
-          <AnimateOnScroll
-            animation="stagger-children"
-            className="mt-12 grid gap-6 sm:grid-cols-3"
-          >
-            {[
-              {
-                quote:
-                  "Patrick's playing made our ceremony feel like a movie. Every guest commented on the music.",
-                name: "Sarah & James",
-                event: "Wedding, Spring Hill TN",
-              },
-              {
-                quote:
-                  "He played Ave Maria at our wedding Mass and there wasn't a dry eye in the church.",
-                name: "Emily & Michael",
-                event: "Catholic Wedding Mass, Nashville",
-              },
-              {
-                quote:
-                  "Booked Patrick for our rehearsal dinner too — he just gets the right vibe for any moment.",
-                name: "Lauren & Tyler",
-                event: "Wedding Reception, Franklin TN",
-              },
-            ].map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl border border-stone-100 bg-[#faf9f7] p-7"
-              >
-                <p className="italic leading-7 text-stone-600">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-stone-900">{t.name}</p>
-                  <p className="text-sm text-stone-400">{t.event}</p>
+        <div className="mt-12 space-y-6">
+          {/* Row 1 — scrolls left */}
+          <div className="overflow-hidden">
+            <div className="marquee-row marquee-scroll-left">
+              {[...testimonials.slice(0, Math.ceil(testimonials.length / 2)), ...testimonials.slice(0, Math.ceil(testimonials.length / 2))].map((t, i) => (
+                <div key={i} className="w-80 shrink-0 rounded-2xl border border-stone-100 bg-[#faf9f7] p-7">
+                  <p className="italic leading-7 text-stone-600">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="mt-4 flex items-center gap-3">
+                    <div className="h-10 w-10 shrink-0 rounded-full bg-stone-200" />
+                    <div>
+                      <p className="font-semibold text-stone-900">{t.name}</p>
+                      <p className="text-sm text-stone-400">{t.event}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </AnimateOnScroll>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 — scrolls right */}
+          <div className="overflow-hidden">
+            <div className="marquee-row marquee-scroll-right">
+              {[...testimonials.slice(Math.ceil(testimonials.length / 2)), ...testimonials.slice(Math.ceil(testimonials.length / 2))].map((t, i) => (
+                <div key={i} className="w-80 shrink-0 rounded-2xl border border-stone-100 bg-[#faf9f7] p-7">
+                  <p className="italic leading-7 text-stone-600">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="mt-4 flex items-center gap-3">
+                    <div className="h-10 w-10 shrink-0 rounded-full bg-stone-200" />
+                    <div>
+                      <p className="font-semibold text-stone-900">{t.name}</p>
+                      <p className="text-sm text-stone-400">{t.event}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -220,7 +314,7 @@ export default function Home() {
             Book Patrick for Your Event
           </h2>
           <p className="mt-4 text-stone-400">
-            Nashville-based and available for weddings, Mass, and private
+            Nashville-based and available for weddings, liturgical services, and private
             events. Reach out to start the conversation.
           </p>
           <Link

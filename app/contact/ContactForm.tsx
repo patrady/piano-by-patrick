@@ -4,9 +4,18 @@ import { useState } from "react";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+const EVENT_TYPES = ["Liturgical Service", "Wedding", "Private Event"] as const;
+
+const SONG_PLACEHOLDERS: Record<string, string> = {
+  "Liturgical Service": `Songs like "Servant Song", "On Eagles Wings", "O God Beyond All Praising"...`,
+  "Wedding": `Songs like "Canon in D", "Air by Bach", "Jesu Joy of Man's Desiring", "You Are the Reason", "A Thousand Years"...`,
+  "Private Event": `List the type of songs you are wanting for your event...`,
+};
+
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [eventType, setEventType] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,7 +28,8 @@ export function ContactForm() {
     const name = data.get("name") as string;
     const email = data.get("email") as string;
     const phone = data.get("phone") as string;
-    const message = data.get("message") as string;
+    const eventDate = data.get("eventDate") as string;
+    const songs = data.get("songs") as string;
 
     const token = process.env.NEXT_PUBLIC_PUSHOVER_TOKEN;
     const user = process.env.NEXT_PUBLIC_PUSHOVER_USER_KEY;
@@ -36,7 +46,7 @@ export function ContactForm() {
       token,
       user,
       title: `New booking inquiry from ${name}`,
-      message: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`,
+      message: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent Type: ${eventType}\nEvent Date: ${eventDate}\n\nSongs of interest:\n${songs}`,
       url: `mailto:${email}`,
       url_title: "Reply via email",
     });
@@ -134,18 +144,63 @@ export function ContactForm() {
       </div>
 
       <div>
+        <label className="block text-sm font-medium text-stone-700">
+          Type of event <span className="text-red-500">*</span>
+        </label>
+        <div className="mt-2 flex flex-wrap gap-3">
+          {EVENT_TYPES.map((type) => (
+            <label key={type} className="cursor-pointer">
+              <input
+                type="radio"
+                name="eventType"
+                value={type}
+                checked={eventType === type}
+                onChange={() => setEventType(type)}
+                className="sr-only"
+                required
+              />
+              <span
+                className={`inline-block rounded-full border px-5 py-2.5 text-sm font-medium transition-colors ${
+                  eventType === type
+                    ? "border-amber-600 bg-amber-50 text-amber-900"
+                    : "border-stone-200 text-stone-600 hover:border-stone-400"
+                }`}
+              >
+                {type}
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
         <label
-          htmlFor="message"
+          htmlFor="eventDate"
           className="block text-sm font-medium text-stone-700"
         >
-          Tell me about your event
+          Event date
+        </label>
+        <input
+          id="eventDate"
+          name="eventDate"
+          type="date"
+          className="mt-2 block w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-stone-900 transition focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="songs"
+          className="block text-sm font-medium text-stone-700"
+        >
+          Songs you&rsquo;re interested in
         </label>
         <textarea
-          id="message"
-          name="message"
-          rows={5}
+          id="songs"
+          name="songs"
+          rows={4}
           className="mt-2 block w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-stone-900 placeholder-stone-400 transition focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
-          placeholder="Date, venue, type of event, any special pieces you have in mind..."
+          placeholder={SONG_PLACEHOLDERS[eventType] ?? "e.g. Clair de Lune, Canon in D, Ave Maria, or any other pieces you have in mind..."}
         />
       </div>
 

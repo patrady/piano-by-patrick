@@ -81,8 +81,33 @@ body {
 }
 
 .video-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+/* Horizontal marquee */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-row {
+  display: inline-flex;
+  gap: 1.5rem;
+  will-change: transform;
+}
+
+.marquee-scroll-left  { animation: marquee-left 90s linear infinite; }
+.marquee-scroll-right { animation: marquee-left 75s linear infinite reverse; }
+
+/* Floating music note animation */
+@keyframes float-note {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.note-float {
+  animation: float-note 3s ease-in-out infinite;
 }
 
 /* Play button pulse */

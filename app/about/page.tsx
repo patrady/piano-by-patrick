@@ -5,7 +5,7 @@ import { AnimateOnScroll } from "../components/AnimateOnScroll";
 export const metadata: Metadata = {
   title: "About | Patrick Brady Piano",
   description:
-    "Learn about Patrick Brady — Nashville-based pianist specializing in weddings and Catholic Mass.",
+    "Learn about Patrick Brady — Nashville-based pianist specializing in weddings and liturgical music.",
 };
 
 export default function About() {
@@ -65,7 +65,7 @@ export default function About() {
               passionate about music because of what it does to a room — the
               way a well-chosen piece can make a bride feel truly seen as she
               walks down the aisle, or give a congregation the space to
-              genuinely pray during Mass. For Patrick, performing isn&apos;t
+              genuinely pray during a service. For Patrick, performing isn&apos;t
               about showcasing technique; it&apos;s about serving the moment.
               That philosophy, combined with a genuine love of the craft, is
               what couples and clergy who work with him notice most — and it is
@@ -85,7 +85,7 @@ export default function About() {
             Ready to work together?
           </h2>
           <p className="mt-3 text-stone-500">
-            Patrick is available for weddings, Catholic Mass, and private
+            Patrick is available for weddings, liturgical services, and private
             events throughout Nashville and Middle Tennessee.
           </p>
           <Link

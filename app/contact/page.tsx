@@ -5,7 +5,7 @@ import { ContactForm } from "./ContactForm";
 export const metadata: Metadata = {
   title: "Contact | Patrick Brady Piano",
   description:
-    "Book Patrick Brady for your wedding, Catholic Mass, or special event in Nashville, TN.",
+    "Book Patrick Brady for your wedding, liturgical service, or special event in Nashville, TN.",
 };
 
 export default function Contact() {
@@ -21,7 +21,7 @@ export default function Contact() {
               Book a Performance
             </h1>
             <p className="mt-4 max-w-xl text-lg text-stone-600">
-              Interested in live piano for your wedding, Mass, or event? Leave
+              Interested in live piano for your wedding, liturgical service, or event? Leave
               your details below and Patrick will be in touch shortly.
             </p>
           </AnimateOnScroll>
@@ -55,7 +55,7 @@ export default function Contact() {
                 </h3>
                 <ul className="mt-2 space-y-1 text-stone-600">
                   <li>• Event date and venue</li>
-                  <li>• Type of event (wedding, Mass, reception, etc.)</li>
+                  <li>• Type of event (wedding, liturgical service, reception, etc.)</li>
                   <li>• Approximate number of guests</li>
                   <li>• Any specific pieces you have in mind</li>
                 </ul>

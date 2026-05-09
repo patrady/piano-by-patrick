@@ -11,7 +11,7 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Patrick Brady | Piano",
   description:
-    "Live piano performance for weddings, Catholic Mass, and special events in Nashville, TN. Book Patrick Brady for your most memorable moments.",
+    "Live piano performance for weddings, liturgical services, and special events in Nashville, TN. Book Patrick Brady for your most memorable moments.",
 };
 
 export default function RootLayout({
