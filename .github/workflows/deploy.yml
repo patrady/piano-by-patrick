@@ -30,9 +30,9 @@ jobs:
 
       - name: Build static export
         env:
-          # Set to your repo name if NOT using a custom domain or username.github.io
-          # Example: NEXT_PUBLIC_BASE_PATH=/piano-portfolio
-          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH }}
+          # Repo is served at /piano-by-patrick subpath on GitHub Pages.
+          # Override with a GitHub variable if a custom domain is later configured at root.
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '/piano-by-patrick' }}
           # Add your Pushover keys as GitHub repository secrets
           NEXT_PUBLIC_PUSHOVER_TOKEN: ${{ secrets.NEXT_PUBLIC_PUSHOVER_TOKEN }}
           NEXT_PUBLIC_PUSHOVER_USER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHOVER_USER_KEY }}
