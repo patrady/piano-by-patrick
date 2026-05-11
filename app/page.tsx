@@ -91,27 +91,22 @@ export default function Home() {
                 key={v.id}
                 animation="fade-up"
                 delay={i * 120}
-                className={`video-card relative flex flex-col sm:flex-row rounded-2xl bg-[#faf9f7] sm:min-h-[600px] ${i % 2 === 1 ? "sm:flex-row-reverse" : ""
+                className={`video-card relative flex flex-col sm:flex-row rounded-2xl bg-[#faf9f7] sm:min-h-[384px] ${i % 2 === 1 ? "sm:flex-row-reverse" : ""
                   }`}
               >
-                {/* Video placeholder */}
+                {/* YouTube embed */}
                 <div className="relative aspect-video sm:aspect-auto sm:w-1/2 shrink-0">
-                  <div className="absolute left-8 right-8 top-1/2 -translate-y-1/2 h-[60%] flex items-center justify-center rounded-2xl border border-stone-200 bg-stone-100 shadow-sm">
-                    <div className="flex flex-col items-center gap-3">
-                      <button
-                        type="button"
-                        aria-label={`Play ${v.piece}`}
-                        className="play-btn relative flex h-14 w-14 items-center justify-center rounded-full bg-stone-200 transition-transform hover:scale-110"
-                      >
-                        <span className="ml-1 border-b-[10px] border-l-[18px] border-t-[10px] border-b-transparent border-l-stone-500 border-t-transparent" />
-                      </button>
-                      <span className="text-xs font-medium uppercase tracking-widest text-stone-400">
-                        Video coming soon
-                      </span>
-                    </div>
+                  <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-[85%] rounded-2xl overflow-hidden shadow-sm">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${v.youtubeId}`}
+                      title={v.piece}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col justify-center p-8 sm:p-12">
+                <div className="flex flex-1 flex-col justify-center p-8">
                   <h3 className="text-xl font-semibold text-stone-900">{v.piece}</h3>
                   <p className="mt-3 leading-7 text-stone-500">
                     {v.description}
@@ -169,7 +164,11 @@ export default function Home() {
                 <div key={i} className="w-80 shrink-0 rounded-2xl border border-stone-100 bg-[#faf9f7] p-7">
                   <p className="italic leading-7 text-stone-600">&ldquo;{t.quote}&rdquo;</p>
                   <div className="mt-4 flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 rounded-full bg-stone-200" />
+                    {t.image ? (
+                      <img src={t.image} alt={t.name} className="h-10 w-10 shrink-0 rounded-full object-cover" />
+                    ) : (
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-stone-200" />
+                    )}
                     <div>
                       <p className="font-semibold text-stone-900">{t.name}</p>
                       <p className="text-sm text-stone-400">{t.event}</p>
@@ -187,7 +186,11 @@ export default function Home() {
                 <div key={i} className="w-80 shrink-0 rounded-2xl border border-stone-100 bg-[#faf9f7] p-7">
                   <p className="italic leading-7 text-stone-600">&ldquo;{t.quote}&rdquo;</p>
                   <div className="mt-4 flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 rounded-full bg-stone-200" />
+                    {t.image ? (
+                      <img src={t.image} alt={t.name} className="h-10 w-10 shrink-0 rounded-full object-cover" />
+                    ) : (
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-stone-200" />
+                    )}
                     <div>
                       <p className="font-semibold text-stone-900">{t.name}</p>
                       <p className="text-sm text-stone-400">{t.event}</p>
